@@ -64,3 +64,6 @@ class IntTestTemplate(unittest.TestCase):
         vmpool.info()
         vm = vmpool.get_by_name('inttest_vm_instantiate_me01')
         self.assertEqual(vm.name, 'inttest_vm_instantiate_me01')
+
+if __name__ == "__main__":
+    unittest.main()

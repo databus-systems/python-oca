@@ -23,3 +23,6 @@ class IntTestClient(unittest.TestCase):
 
     def test_connection(self):
         self.assertIn(os.environ['OCA_INT_TESTS'], self.c.version())
+
+if __name__ == "__main__":
+    unittest.main()
