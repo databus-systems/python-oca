@@ -4,3 +4,4 @@
 oca.egg*
 .tox
 .cache/
+.vscode/*
