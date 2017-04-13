@@ -39,12 +39,103 @@ class IntTestTemplate(unittest.TestCase):
         with self.assertRaises(OpenNebulaException):
             vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>vm-example1</NAME><TEMPLATE/></VM>')
 
-    # def test_update(self):
-    #     oca.VmTemplate.allocate(self.c, '<VMTEMPLATE><NAME>inttest_update01</NAME><TEMPLATE/></VMTEMPLATE>')
-    #     tp = oca.VmTemplatePool(self.c)
-    #     tp.info()
-    #     templ = tp.get_by_name('inttest_update01')
-    #     templ.update('MEMORY=1024 CPU=2')
+    def test_restart(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.restart()
+
+    def test_resubmit(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.resubmit()
+
+    def test_release(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.release()
+
+    def test_stop(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.stop()
+
+    def test_resume(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.resume()
+
+    # def test_cancel(self):
+    #     vms = oca.VirtualMachinePool(self.c)
+    #     vms.info()
+    #     for vm in vms:
+    #         if vm.name.startswith('vm-example'):
+    #             vm.cancel()
+
+    def test_deploy(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.deploy()
+
+    def test_finalize(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.finalize()
+
+    def test_live_migrate(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.live_migrate('http://python-oca:2633/RPC2')
+
+    def test_migrate(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.migrate('http://python-oca:2633/RPC2')
+
+    def test_hold(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.hold()
+
+    def test_suspend(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.suspend()
+
+    def test_shutdown(self):
+        vms = oca.VirtualMachinePool(self.c)
+        vms.info()
+        for vm in vms:
+            if vm.name.startswith('vm-example'):
+                vm.shutdown()
+
+    # def test_save_disk(self):
+    #     vms = oca.VirtualMachinePool(self.c)
+    #     vms.info()
+    #     for vm in vms:
+    #         if vm.name.startswith('vm-example1'):
+    #             vm.save_disk(1, '~')
 
     def test_delete(self):
         vms = oca.VirtualMachinePool(self.c)
