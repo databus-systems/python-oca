@@ -40,13 +40,26 @@ class IntTestUser(unittest.TestCase):
             user = oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
             user = oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
 
+    def test_change_passwd(self):
+        users = oca.UserPool(self.c)
+        users.info()
+        for user in users:
+            if user.name.startswith('inttest_user_'):
+                user.change_passwd('new_password')
+
+    def test_chgrp(self):
+        users = oca.UserPool(self.c)
+        users.info()
+        for user in users:
+            if user.name.startswith('inttest_user_'):
+                user.chgrp(0)
+
     def test_delete(self):
         users = oca.UserPool(self.c)
         users.info()
         for user in users:
             if user.name.startswith('inttest_user_'):
                 user.delete()
-
 
 if __name__ == "__main__":
     unittest.main()
