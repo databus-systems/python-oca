@@ -1,7 +1,6 @@
-# vim:  set fileencoding=utf8
 # encoding:utf8
 #
-# Author: Matthias Schmitz <matthias@sigxcpu.org>
+# Author: Alin Floare <alin.floare@databus.systems>
 
 import os
 import unittest
@@ -12,7 +11,7 @@ from oca.exceptions import OpenNebulaException
 
 @unittest.skipUnless(os.environ.get('OCA_INT_TESTS', False),
                      "Skipping integration tests")
-class IntTestTemplate(unittest.TestCase):
+class IntTestVm(unittest.TestCase):
     def setUp(self):
         try:
             del os.environ["ONE_AUTH"]
