@@ -35,13 +35,27 @@ class IntTestHost(unittest.TestCase):
         host = oca.Host.allocate(self.c, 'inttest_host_3', 'im_dummy', 'vmm_dummy', 0)
         host = oca.Host.allocate(self.c, 'inttest_host_4', 'im_dummy', 'vmm_dummy', 0)
 
-    # def test_allocate_with_same_name(self):
-    #     with self.assertRaises(OpenNebulaException):
-    #         host = oca.Host.allocate(self.c, '<HOST><NAME>inttest_host_1</NAME><IM_MAD>im_dummy</IM_MAD<VM_MAD>vmm_dummy</VM_MAD><TM_MAD>tm_dummy</TM_MAD></HOST>')
+    def test_update(self):
+        hosts = oca.HostPool(self.c)
+        hosts.info()
+        for host in hosts:
+            if host.name.startswith('inttest'):
+                host.update(open(os.path.join(os.path.dirname(oca.__file__),
+                            'tests/fixtures/host.xml')).read())
 
-    # def test_instantiate(self):
-    #     host = oca.Host(open(os.path.join(os.path.dirname(oca.__file__), 'tests/fixtures/host.xml')).read(), self.c)
-    #     host.allocate()
+    def test_enable(self):
+        hosts = oca.HostPool(self.c)
+        hosts.info()
+        for host in hosts:
+            if host.name.startswith('inttest'):
+                host.enable()
+
+    def test_disable(self):
+        hosts = oca.HostPool(self.c)
+        hosts.info()
+        for host in hosts:
+            if host.name.startswith('inttest'):
+                host.disable()
 
     def test_delete(self):
         hosts = oca.HostPool(self.c)
