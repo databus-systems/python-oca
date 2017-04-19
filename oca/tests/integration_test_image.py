@@ -43,6 +43,62 @@ class IntTestImage(unittest.TestCase):
             img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
             img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
 
+    def test_update(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.update('<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>')
+
+    def test_chown(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.chown(0, -1)
+
+    def test_set_nonpersistent(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.set_nonpersistent()
+
+    def test_set_persistent(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.set_persistent()
+
+    def test_unpublish(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.unpublish()
+
+    def test_publish(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.publish()
+
+    def test_disable(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.disable()
+
+    def test_enable(self):
+        imgs = oca.ImagePool(self.c)
+        imgs.info()
+        for img in imgs:
+            if img.name.startswith('inttest'):
+                img.enable()
+
     def test_delete(self):
         imgs = oca.ImagePool(self.c)
         imgs.info()
