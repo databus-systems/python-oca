@@ -6,3 +6,4 @@ pipeline:
       - pip wheel -r requirements.txt --wheel-dir=wheeldir --find-links=wheeldir
       - pip install --use-wheel --no-index --find-links=wheeldir -r requirements.txt
       - python -m unittest autodiscover
+
