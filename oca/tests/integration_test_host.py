@@ -19,7 +19,8 @@ class IntTestHost(unittest.TestCase):
         except KeyError:
             pass
 
-        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'], os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
+        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'],
+                            os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
 
     def tearDown(self):
         print("teardown")
@@ -30,10 +31,22 @@ class IntTestHost(unittest.TestCase):
                 host.delete()
 
     def test_allocate(self):
-        host = oca.Host.allocate(self.c, 'inttest_host_1', 'im_dummy', 'vmm_dummy', 0)
-        host = oca.Host.allocate(self.c, 'inttest_host_2', 'im_dummy', 'vmm_dummy', 0)
-        host = oca.Host.allocate(self.c, 'inttest_host_3', 'im_dummy', 'vmm_dummy', 0)
-        host = oca.Host.allocate(self.c, 'inttest_host_4', 'im_dummy', 'vmm_dummy', 0)
+        oca.Host.allocate(
+            self.c, 'inttest_host_1', 'im_dummy', 'vmm_dummy', 0)
+
+        oca.Host.allocate(
+            self.c, 'inttest_host_2', 'im_dummy', 'vmm_dummy', 0)
+
+        oca.Host.allocate(
+            self.c, 'inttest_host_3', 'im_dummy', 'vmm_dummy', 0)
+
+        oca.Host.allocate(
+            self.c, 'inttest_host_4', 'im_dummy', 'vmm_dummy', 0)
+
+    def test_allocate_with_same_name(self):
+        with self.assertRaises(OpenNebulaException):
+            oca.Host.allocate(
+                self.c, 'inttest_host_4', 'im_dummy', 'vmm_dummy', 0)
 
     def test_update(self):
         hosts = oca.HostPool(self.c)
@@ -63,6 +76,7 @@ class IntTestHost(unittest.TestCase):
         for host in hosts:
             if host.name.startswith('inttest'):
                 host.delete()
+
 
 if __name__ == "__main__":
     unittest.main()
