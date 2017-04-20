@@ -90,9 +90,10 @@ class TestVirtualMachine(unittest.TestCase):
     def test_actions(self):
         oca.client = oca.Client('test:test')
         vm = oca.VirtualMachine(self.xml, self.client)
-        for action in ['shutdown', 'shutdown_hard', 'poweroff', 'poweroff_hard',
-                       'hold', 'release', 'stop', 'cancel', 'suspend', 'resume',
-                       'reboot', 'finalize', 'delete', 'resched', 'unresched']:
+        for action in ['shutdown', 'shutdown_hard', 'poweroff',
+                       'poweroff_hard', 'hold', 'release', 'stop', 'cancel',
+                       'suspend', 'resume', 'reboot', 'finalize', 'delete',
+                       'resched', 'unresched']:
             self.client.call = Mock(return_value='')
             getattr(vm, action)()
             if action in ('shutdown_hard', 'poweroff_hard', 'undeploy_hard'):
@@ -108,7 +109,8 @@ class TestVirtualMachine(unittest.TestCase):
             vm = oca.VirtualMachine('<VM><ID>2</ID><STATE>%s</STATE></VM>' % i,
                                     self.client)
             assert vm.str_state == oca.VirtualMachine.VM_STATE[i]
-            state = oca.VirtualMachine.SHORT_VM_STATES[oca.VirtualMachine.VM_STATE[i]]
+            state = oca.VirtualMachine.SHORT_VM_STATES[
+                oca.VirtualMachine.VM_STATE[i]]
             assert vm.short_state == state
 
     def test_lcm_states(self):
@@ -116,7 +118,8 @@ class TestVirtualMachine(unittest.TestCase):
             xml = '<VM><ID>2</ID><LCM_STATE>%s</LCM_STATE></VM>' % i
             vm = oca.VirtualMachine(xml, self.client)
             assert vm.str_lcm_state == oca.VirtualMachine.LCM_STATE[i]
-            lcm = oca.VirtualMachine.SHORT_LCM_STATES[oca.VirtualMachine.LCM_STATE[i]]
+            lcm = oca.VirtualMachine.SHORT_LCM_STATES[
+                oca.VirtualMachine.LCM_STATE[i]]
             assert vm.short_lcm_state == lcm
 
     def test_resubmit(self):

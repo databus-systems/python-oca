@@ -36,7 +36,8 @@ class TestHost(unittest.TestCase):
             h = oca.Host('<HOST><ID>2</ID><STATE>{0}</STATE></HOST>'.format(i),
                          self.client)
             assert h.str_state == oca.Host.HOST_STATES[i]
-            assert h.short_state == oca.Host.SHORT_HOST_STATES[oca.Host.HOST_STATES[i]]
+            assert h.short_state == oca.Host.SHORT_HOST_STATES[
+                oca.Host.HOST_STATES[i]]
 
     def test_repr(self):
         h = oca.Host(self.xml, self.client)
