@@ -18,7 +18,8 @@ class IntTestVm(unittest.TestCase):
         except KeyError:
             pass
 
-        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'], os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
+        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'],
+                            os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
 
     def tearDown(self):
         print("teardown")
@@ -29,14 +30,26 @@ class IntTestVm(unittest.TestCase):
                 vm.delete()
 
     def test_allocate(self):
-        vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>inttest_vm_1</NAME><MEMORY>512</MEMORY><CPU>1</CPU><TEMPLATE/></VM>')
-        vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>inttest_vm_2</NAME><MEMORY>512</MEMORY><CPU>1</CPU><TEMPLATE/></VM>')
-        vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>inttest_vm_3</NAME><MEMORY>512</MEMORY><CPU>1</CPU><TEMPLATE/></VM>')
-        vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>inttest_vm_4</NAME><MEMORY>512</MEMORY><CPU>1</CPU><TEMPLATE/></VM>')
+        oca.VirtualMachine.allocate(
+            self.c, '<VM><NAME>inttest_vm_1</NAME><MEMORY>512</MEMORY>\
+            <CPU>1</CPU><TEMPLATE/></VM>')
+
+        oca.VirtualMachine.allocate(
+            self.c, '<VM><NAME>inttest_vm_2</NAME><MEMORY>512</MEMORY>\
+            <CPU>1</CPU><TEMPLATE/></VM>')
+
+        oca.VirtualMachine.allocate(
+            self.c, '<VM><NAME>inttest_vm_3</NAME><MEMORY>512</MEMORY>\
+            <CPU>1</CPU><TEMPLATE/></VM>')
+
+        oca.VirtualMachine.allocate(
+            self.c, '<VM><NAME>inttest_vm_4</NAME><MEMORY>512</MEMORY>\
+            <CPU>1</CPU><TEMPLATE/></VM>')
 
     def test_allocate_with_same_name(self):
         with self.assertRaises(OpenNebulaException):
-            vm = oca.VirtualMachine.allocate(self.c, '<VM><NAME>inttest_vm_1</NAME><TEMPLATE/></VM>')
+            oca.VirtualMachine.allocate(
+                self.c, '<VM><NAME>inttest_vm_1</NAME><TEMPLATE/></VM>')
 
     def test_restart(self):
         vms = oca.VirtualMachinePool(self.c)
@@ -144,7 +157,9 @@ class IntTestVm(unittest.TestCase):
                 vm.delete()
 
     # def test_instantiate(self):
-    #     templ = oca.VmTemplate.allocate(self.c, '<VMTEMPLATE><NAME>inttest_instantiate_me01</NAME><MEMORY>1234</MEMORY><CPU>2</CPU></VMTEMPLATE>')
+        # templ = oca.VmTemplate.allocate(
+        #     self.c, '<VMTEMPLATE><NAME>inttest_instantiate_me01</NAME>\
+        #     <MEMORY>1234</MEMORY><CPU>2</CPU></VMTEMPLATE>')
     #     tp = oca.VmTemplatePool(self.c)
     #     tp.info()
     #     templ = tp.get_by_name('inttest_instantiate_me01')
@@ -153,6 +168,7 @@ class IntTestVm(unittest.TestCase):
     #     vmpool.info()
     #     vm = vmpool.get_by_name('inttest_vm_instantiate_me01')
     #     self.assertEqual(vm.name, 'inttest_vm_instantiate_me01')
+
 
 if __name__ == "__main__":
     unittest.main()

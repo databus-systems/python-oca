@@ -19,7 +19,8 @@ class IntTestVirtualNetwork(unittest.TestCase):
         except KeyError:
             pass
 
-        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'], os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
+        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'],
+                            os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
 
     def tearDown(self):
         print("teardown")
@@ -30,15 +31,31 @@ class IntTestVirtualNetwork(unittest.TestCase):
                 vn.delete()
 
     def test_allocate(self):
-        vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest01</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
-        vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest02</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
-        vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest03</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
-        vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+        oca.VirtualNetwork.allocate(
+            self.c, '<VNET><NAME>inttest01</NAME><VN_MAD>fw</VN_MAD>\
+            <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+
+        oca.VirtualNetwork.allocate(
+            self.c, '<VNET><NAME>inttest02</NAME><VN_MAD>fw</VN_MAD>\
+            <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+
+        oca.VirtualNetwork.allocate(
+            self.c, '<VNET><NAME>inttest03</NAME><VN_MAD>fw</VN_MAD>\
+            <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+
+        oca.VirtualNetwork.allocate(
+            self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD>\
+            <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
 
     def test_allocate_with_same_name(self):
         with self.assertRaises(OpenNebulaException):
-            vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
-            vn = oca.VirtualNetwork.allocate(self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD><BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+            oca.VirtualNetwork.allocate(
+                self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD>\
+                <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
+
+            oca.VirtualNetwork.allocate(
+                self.c, '<VNET><NAME>inttest04</NAME><VN_MAD>fw</VN_MAD>\
+                <BRIDGE>virbr0</BRIDGE><TEMPLATE/></VNET>')
 
     def test_chown(self):
         vns = oca.UserPool(self.c)
@@ -67,6 +84,7 @@ class IntTestVirtualNetwork(unittest.TestCase):
         for vn in vns:
             if vn.name.startswith('inttest'):
                 vn.delete()
+
 
 if __name__ == "__main__":
     unittest.main()

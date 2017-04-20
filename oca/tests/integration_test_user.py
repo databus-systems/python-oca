@@ -19,7 +19,8 @@ class IntTestUser(unittest.TestCase):
         except KeyError:
             pass
 
-        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'], os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
+        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'],
+                            os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
 
     def tearDown(self):
         print("teardown")
@@ -30,15 +31,15 @@ class IntTestUser(unittest.TestCase):
                 user.delete()
 
     def test_allocate(self):
-        user = oca.User.allocate(self.c, 'inttest_user_1', 'inttest_user_1')
-        user = oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
-        user = oca.User.allocate(self.c, 'inttest_user_3', 'inttest_user_3')
-        user = oca.User.allocate(self.c, 'inttest_user_4', 'inttest_user_4')
+        oca.User.allocate(self.c, 'inttest_user_1', 'inttest_user_1')
+        oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
+        oca.User.allocate(self.c, 'inttest_user_3', 'inttest_user_3')
+        oca.User.allocate(self.c, 'inttest_user_4', 'inttest_user_4')
 
     def test_allocate_with_same_name(self):
         with self.assertRaises(OpenNebulaException):
-            user = oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
-            user = oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
+            oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
+            oca.User.allocate(self.c, 'inttest_user_2', 'inttest_user_2')
 
     def test_change_passwd(self):
         users = oca.UserPool(self.c)
@@ -60,6 +61,7 @@ class IntTestUser(unittest.TestCase):
         for user in users:
             if user.name.startswith('inttest_user_'):
                 user.delete()
+
 
 if __name__ == "__main__":
     unittest.main()
