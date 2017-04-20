@@ -9,7 +9,9 @@ import unittest
 import oca
 from oca.exceptions import OpenNebulaException
 
-condition = bool(os.environ.get('OCA_INT_TESTS', False)) & bool(os.environ.get('OCA_INT_IMAGE_TESTS', False))
+condition = (bool(os.environ.get(
+    'OCA_INT_TESTS', False)) and bool(os.environ.get(
+        'OCA_INT_IMAGE_TESTS', False)))
 
 
 @unittest.skipUnless(condition, "Skipping integration tests")
@@ -20,7 +22,8 @@ class IntTestImage(unittest.TestCase):
         except KeyError:
             pass
 
-        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'], os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
+        self.c = oca.Client(os.environ['OCA_INT_TESTS_ONE_AUTH'],
+                            os.environ['OCA_INT_TESTS_ONE_XMLRPC'])
 
     def tearDown(self):
         print("teardown")
@@ -31,24 +34,36 @@ class IntTestImage(unittest.TestCase):
                 img.delete()
 
     def test_allocate(self):
-        path = os.environ.get('OCA_INT_TEST_IMAGE_PATH', '~/ttyvd-context.qcow2')
-        # img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_1</NAME><PATH>{p}</PATH></TEMPLATE>'.format(p=path), 1)
+        # path = os.environ.get('OCA_INT_TEST_IMAGE_PATH',
+        # '~/ttyvd-context.qcow2')
 
-        img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_4</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
-        img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_5</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
-        img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
+        oca.Image.allocate(
+            self.c, '<TEMPLATE><NAME>inttest_img_4</NAME><TYPE>DATABLOCK</TYPE>\
+            <SIZE>382</SIZE></TEMPLATE>', 1)
+
+        oca.Image.allocate(
+            self.c, '<TEMPLATE><NAME>inttest_img_5</NAME><TYPE>DATABLOCK</TYPE>\
+                    <SIZE>382</SIZE></TEMPLATE>', 1)
+        oca.Image.allocate(
+            self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE>\
+                    <SIZE>382</SIZE></TEMPLATE>', 1)
 
     def test_allocate_with_same_name(self):
         with self.assertRaises(OpenNebulaException):
-            img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
-            img = oca.Image.allocate(self.c, '<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
+            oca.Image.allocate(
+                self.c, '<TEMPLATE><NAME>inttest_img_6</NAME>\
+                <TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
+            oca.Image.allocate(
+                self.c, '<TEMPLATE><NAME>inttest_img_6</NAME>\
+                <TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>', 1)
 
     def test_update(self):
         imgs = oca.ImagePool(self.c)
         imgs.info()
         for img in imgs:
             if img.name.startswith('inttest'):
-                img.update('<TEMPLATE><NAME>inttest_img_6</NAME><TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>')
+                img.update('<TEMPLATE><NAME>inttest_img_6</NAME>\
+                            <TYPE>DATABLOCK</TYPE><SIZE>382</SIZE></TEMPLATE>')
 
     def test_chown(self):
         imgs = oca.ImagePool(self.c)
