@@ -21,6 +21,7 @@
     <CLUSTER/>
     <BRIDGE>vbr0</BRIDGE>
     <VLAN>1</VLAN>
+    <VN_MAD>vn_dummy</VN_MAD>
     <PARENT_NETWORK_ID/>
     <PHYDEV><![CDATA[bond1]]></PHYDEV>
     <VLAN_ID><![CDATA[1337]]></VLAN_ID>
@@ -50,6 +51,7 @@
     <CLUSTER/>
     <BRIDGE>vbr0</BRIDGE>
     <VLAN>1</VLAN>
+    <VN_MAD>vn_dummy</VN_MAD>
     <PARENT_NETWORK_ID/>
     <PHYDEV><![CDATA[bond1]]></PHYDEV>
     <VLAN_ID><![CDATA[42]]></VLAN_ID>
