@@ -71,6 +71,7 @@ class VirtualNetwork(PoolElement):
         'uname': str,
         'gname': str,
         'name': str,
+        'vn_mad': str,
         # 'type'     : int,
         'bridge': str,
         # 'public'   : bool,
@@ -82,7 +83,7 @@ class VirtualNetwork(PoolElement):
     ELEMENT_NAME = 'VNET'
 
     @staticmethod
-    def allocate(client, template):
+    def allocate(client, template, cluster_id=-1):
         """
         allocates a new virtual network in OpenNebula
 
@@ -90,8 +91,11 @@ class VirtualNetwork(PoolElement):
 
         ``template``
            a string containing the template of the virtual network
+
+        ``cluster_id``
+           the cluster ID. If it is -1, the default one will be used.
         """
-        vn_id = client.call(VirtualNetwork.METHODS['allocate'], template)
+        vn_id = client.call(VirtualNetwork.METHODS['allocate'], template, cluster_id)
         return vn_id
 
     def __init__(self, xml, client):

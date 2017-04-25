@@ -56,7 +56,8 @@ class TestVirtualNetwork(unittest.TestCase):
         assert (2 == len(h.address_ranges))
         assert (1 == h.address_ranges[1].id)
         assert (0 == h.address_ranges[0].id)
-        assert (" 0 68719479930 1 68719545020" == h.address_ranges[0].allocated)
+        assert (" 0 68719479930 1 68719545020" ==
+                h.address_ranges[0].allocated)
         assert ("10.1.0.10" == h.address_ranges[0].ip)
         assert ("00:22:44:66:88:aa" == h.address_ranges[0].mac)
         assert (507 == h.address_ranges[0].size)

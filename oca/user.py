@@ -82,7 +82,7 @@ class User(PoolElement):
     ELEMENT_NAME = 'USER'
 
     @staticmethod
-    def allocate(client, user, password):
+    def allocate(client, user, password, auth_driver='core', groups=[0]):
         """
         allocates a new user in OpenNebula
 
@@ -91,8 +91,18 @@ class User(PoolElement):
 
         ``password``
            password for the new user
+
+        ``auth_driver``
+           authentication driver for the new user.
+           If it is an empty string, then the default (‘core’) is used
+
+        ``groups``
+           array of Group IDs. The first ID will be used as the main group.
+           This array can be empty, in which case the default group will
+           be used
         """
-        user_id = client.call(User.METHODS['allocate'], user, password)
+        user_id = client.call(User.METHODS['allocate'], user, password,
+                              auth_driver, groups)
         return user_id
 
     def __init__(self, xml, client):
