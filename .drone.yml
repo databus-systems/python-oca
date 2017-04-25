@@ -14,3 +14,9 @@ pipeline:
     index: root/opensource
     username: ${OPENSOURCE_DEVPI_USER}
     password: ${OPENSOURCE_DEVPI_PASSWORD}
+
+  notify-slack:
+    image: plugins/slack
+    webhook: ${SLACK_HOOK}
+    when:
+     status: [ success, failure ]
