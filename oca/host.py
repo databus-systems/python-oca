@@ -44,7 +44,6 @@ class Host(PoolElement):
         'state': int,
         'im_mad': extractString,
         'vm_mad': extractString,
-        'vn_mad': extractString,
         'last_mon_time': int,
         'cluster': extractString,
         'cluster_id': int,

@@ -83,6 +83,7 @@ class Image(PoolElement):
 
         ``template``
            a string containing the template of the image
+
         ``datastore``
           the datastore id where the image is to be allocated
         """

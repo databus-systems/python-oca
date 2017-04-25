@@ -23,7 +23,8 @@ class TestImage(unittest.TestCase):
 
     def test_allocate(self):
         self.client.call = Mock(return_value=2)
-        assert oca.Image.allocate(self.client, IMAGE_TEMPLATE, DEFAULT_IMG_DATASTORE) == 2
+        assert oca.Image.allocate(
+            self.client, IMAGE_TEMPLATE, DEFAULT_IMG_DATASTORE) == 2
 
     def test_enable(self):
         self.client.call = Mock(return_value='')
@@ -74,7 +75,8 @@ class TestImage(unittest.TestCase):
             h = oca.Image('<IMAGE><ID>2</ID><STATE>%s</STATE></IMAGE>' % i,
                           self.client)
             assert h.str_state == oca.Image.IMAGE_STATES[i]
-            short_image_state = oca.Image.SHORT_IMAGE_STATES[oca.Image.IMAGE_STATES[i]]
+            short_image_state = oca.Image.SHORT_IMAGE_STATES[
+                oca.Image.IMAGE_STATES[i]]
             assert h.short_state == short_image_state
 
     def test_repr(self):
@@ -86,7 +88,8 @@ class TestImage(unittest.TestCase):
             h = oca.Image('<IMAGE><ID>2</ID><TYPE>%s</TYPE></IMAGE>' % i,
                           self.client)
             assert h.str_type == oca.Image.IMAGE_TYPES[i]
-            short_image_type = oca.Image.SHORT_IMAGE_TYPES[oca.Image.IMAGE_TYPES[i]]
+            short_image_type = oca.Image.SHORT_IMAGE_TYPES[
+                oca.Image.IMAGE_TYPES[i]]
             assert h.short_type == short_image_type
 
     def test_template(self):
@@ -105,5 +108,5 @@ class TestImage(unittest.TestCase):
         self.client.call = Mock(return_value='')
         h = oca.Image(self.xml, self.client)
         h.chmod(1, 0, 0, -1, -1, -1, -1, -1, -1)
-        self.client.call.assert_called_once_with('image.chmod',
-                                                 '1', 1, 0, 0, -1, -1, -1, -1, -1, -1)
+        self.client.call.assert_called_once_with(
+            'image.chmod', '1', 1, 0, 0, -1, -1, -1, -1, -1, -1)

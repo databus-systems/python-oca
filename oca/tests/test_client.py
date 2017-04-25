@@ -39,13 +39,13 @@ class TestClient(unittest.TestCase):
     @raises(oca.OpenNebulaException)
     def test_wrong_default_user_path(self):
         oca.Client.DEFAULT_ONE_AUTH = '/ad/ads/a/das/d/sad/sad/sa/d/one_auth'
-        c = oca.Client()
+        oca.Client()
 
     @raises(oca.OpenNebulaException)
     def test_invalid_secret(self):
         os.environ["ONE_AUTH"] = os.path.join(os.path.dirname(oca.__file__),
                                               'tests/fixtures/one_auth')
-        c = oca.Client('testtest')
+        oca.Client('testtest')
 
     def test_addres(self):
         c = oca.Client('test:test', "http://8.8.8.8:2633/RPC2")
