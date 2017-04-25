@@ -7,3 +7,10 @@ pipeline:
       - pip install --use-wheel --no-index --find-links=wheeldir -r requirements.txt
       - flake8 oca/tests
       - python -m unittest discover
+
+  build-package:
+    image: registry.databus.systems/drone-plugins/drone-devpi
+    server: https://devpi.databus.systems
+    index: https://devpi.databus.systems/root/opensource
+    username: ${OPENSOURCE_DEVPI_USER}
+    password: ${OPENSOURCE_DEVPI_PASSWORD}
