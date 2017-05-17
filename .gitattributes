@@ -1,0 +1,2 @@
+.drone.yml merge=ours
+.drone.yml.sig merge=ours
