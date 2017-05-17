@@ -6,4 +6,3 @@ oca.egg*
 .cache/
 .vscode/*
 tmp/*
-.drone.*
