@@ -4,7 +4,7 @@ import setuptools
 import os
 import sys
 
-__version__ = '5.2.1-1'
+__version__ = '5.2.1-2'
 
 
 # borrowed from Pylons project
