@@ -10,8 +10,8 @@ pipeline:
 
   build-package:
     image: registry.databus.systems/drone-plugins/drone-devpi
-    server: https://devpi.databus.systems
-    index: root/opensource
+    server: ${DEVPI_SERVER}
+    index: ${OPENSOURCE_DEVPI_INDEX}
     username: ${OPENSOURCE_DEVPI_USER}
     password: ${OPENSOURCE_DEVPI_PASSWORD}
 
